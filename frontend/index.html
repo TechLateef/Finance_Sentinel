@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Sentinel | Autonomous AI Lending Platform</title>
+    <meta name="description" content="Finance Sentinel is an autonomous AI agent that evaluates borrower reputation and executes on-chain USD₮ loans using Tether WDK.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="logo">
+                <span class="logo-icon">💠</span>
+                <h1>FINANCE SENTINEL <small>v1.0</small></h1>
+            </div>
+            <div class="wallet-status">
+                <div class="status-indicator" id="connection-status"></div>
+                <span id="wallet-address">Connecting to Hive Network...</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="grid">
+                <!-- Left: Control & Stats -->
+                <div class="panel controls">
+                    <h2>Sentinel Control</h2>
+                    <div class="lending-metrics">
+                        <div class="metric">
+                            <label>Lending Pool</label>
+                            <span class="value" id="pool-balance">0.00 USD₮</span>
+                        </div>
+                        <div class="metric">
+                            <label>Active Loans</label>
+                            <span class="value" id="active-loans">0</span>
+                        </div>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>Issue Autonomous Loan</h3>
+                        <p>Sentinel will evaluate borrower reputation autonomously.</p>
+                        <div class="input-group">
+                            <input type="text" id="borrower-id" placeholder="GitHub Username or Wallet">
+                            <input type="number" id="loan-amount" placeholder="Amount (USD₮)">
+                            <button id="start-evaluation">START EVALUATION</button>
+                        </div>
+                    </div>
+
+                    <div class="progress-panel">
+                        <h3>Current Goal Progress</h3>
+                        <div class="progress-container">
+                            <div id="goal-progress-bar" class="progress-bar"></div>
+                        </div>
+                        <div id="goal-status" class="status-text">Neutral</div>
+                    </div>
+                </div>
+
+                <!-- Center/Right: Agent Brain & Log -->
+                <div class="panel terminal-container">
+                    <div class="terminal-header">
+                        <span>Sentinel Thought Process</span>
+                        <div class="pulse-indicator"></div>
+                    </div>
+                    <div id="terminal-output" class="terminal">
+                        <div class="line system">>> Sentinel initialized. Waiting for protocol request...</div>
+                    </div>
+                    <div class="terminal-input">
+                        <input type="text" id="chat-input" placeholder="Ask Sentinel anything...">
+                        <button id="btn-send-chat">SEND</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bottom-bar">
+                <div class="tx-history">
+                    <h3>Recent On-chain Settlements</h3>
+                    <div id="tx-log" class="tx-list">
+                        <!-- Transactions will be injected here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Powered by <span>Tether WDK</span> & <span>Aden Hive Agent Framework</span></p>
+        </footer>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>

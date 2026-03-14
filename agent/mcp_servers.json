@@ -1,0 +1,11 @@
+{
+    "wdk-bridge": {
+        "transport": "stdio",
+        "command": "node",
+        "args": [
+            "dist/index.js"
+        ],
+        "cwd": "../../../../tools/wdk_bridge",
+        "description": "Tether WDK Bridge"
+    }
+}
