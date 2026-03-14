@@ -35,14 +35,18 @@ async function init() {
   log("Contacting Hive Neural Network...");
   try {
     // 1. Check health
-    const health = await fetch(`${HIVE_API}/api/health`).then((r) => r.json());
+    const health = await fetch(`${HIVE_API}/api/health`, {
+      headers: { "Bypass-Tunnel-Reminder": "true" }
+    }).then((r) => r.json());
     if (health.status === "ok") {
       log("Hive Backend Online.", "success");
       statusIndicator.classList.add("online");
     }
 
     // 2. Discover if Sentinel is already running
-    const discover = await fetch(`${HIVE_API}/api/sessions`).then((r) =>
+    const discover = await fetch(`${HIVE_API}/api/sessions`, {
+      headers: { "Bypass-Tunnel-Reminder": "true" }
+    }).then((r) =>
       r.json(),
     );
     const sentinelSession = discover.sessions.find(
@@ -74,7 +78,7 @@ async function startNewSession() {
   try {
     const resp = await fetch(`${HIVE_API}/api/sessions`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
       body: JSON.stringify({
         agent_path:
           "/home/mk_lateef/Desktop/OSS/hive/core/framework/agents/finance_sentinel",
@@ -101,6 +105,7 @@ async function startPolling() {
     try {
       const msgs = await fetch(
         `${HIVE_API}/api/sessions/${currentSessionId}/queen-messages`,
+        { headers: { "Bypass-Tunnel-Reminder": "true" } }
       ).then((r) => r.json());
       updateTerminal(msgs.messages);
     } catch (e) {
@@ -114,6 +119,7 @@ async function startPolling() {
     try {
       const progress = await fetch(
         `${HIVE_API}/api/sessions/${currentSessionId}/goal-progress`,
+        { headers: { "Bypass-Tunnel-Reminder": "true" } }
       ).then((r) => r.json());
       if (progress && progress.total_weight > 0) {
         const percent = Math.min(
@@ -188,7 +194,7 @@ btnEvaluate.addEventListener("click", async () => {
       `${HIVE_API}/api/sessions/${currentSessionId}/trigger`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
         body: JSON.stringify({
           entry_point_id: "start",
           input_data: {
@@ -219,7 +225,7 @@ btnChat.addEventListener("click", async () => {
   try {
     await fetch(`${HIVE_API}/api/sessions/${currentSessionId}/chat`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Bypass-Tunnel-Reminder": "true" },
       body: JSON.stringify({ message: msg }),
     });
   } catch (err) {
