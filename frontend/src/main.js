@@ -1,5 +1,6 @@
 const HIVE_API = "https://short-seas-win.loca.lt";
 let currentSessionId = null;
+//
 
 // UI Elements
 const terminal = document.getElementById("terminal-output");
